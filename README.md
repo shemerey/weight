@@ -2,6 +2,7 @@
 
 * [![Code Climate](https://codeclimate.com/github/shemerey/weight.png)](https://codeclimate.com/github/shemerey/weight)
 * [![Build Status](https://api.travis-ci.org/shemerey/weight.png)](https://travis-ci.org/shemerey/weight)
+* [![Gem Version](https://badge.fury.io/rb/weight.png)](http://badge.fury.io/rb/weight)
 
 It's dead simple Value object, which provides convenient way to work with
 weight in a different unit systems. It could be useful if you have to work with
