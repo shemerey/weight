@@ -24,19 +24,19 @@ class Weight
   # Returns the weight converted to pounds
   # @return [Float] The weight in pounds
   def to_kgs
-    raw_data_in_kg.round(4)
+    round(raw_data_in_kg)
   end
 
   # Returns the weight converted to kilograms
   # @return [Float] The weight in kilograms
   def to_lbs
-    (raw_data_in_kg * pounds_per_kilogram).round(4)
+    round(raw_data_in_kg * pounds_per_kilogram)
   end
 
   # Returns the weight converted to pounds
   # @return [Float] The weight in pounds
   def to_f
-    value.to_f.round(4)
+    round(value.to_f)
   end
 
   # Returns the weight in pounds rounded to the closest integer
@@ -61,7 +61,7 @@ class Weight
   # @raise [TypeError] When the argument passed is not a Weight
   def ==(other)
     raise TypeError, 'You can only compare weights' unless other.is_a?(Weight)
-    raw_data_in_kg.round(4) == other.to_kgs
+    self.to_kgs  == other.to_kgs
   end
 
   # Comparison operator
@@ -101,6 +101,10 @@ class Weight
   end
 
   private
+
+  def round(value)
+    sprintf("%0.0#{round_level}f", value.to_f).to_f
+  end
 
   # The weight expressed in kilograms for internal usage
   # @return [Float] The weight in pounds

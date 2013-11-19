@@ -15,6 +15,10 @@ module Weight::Configuration
     @@default_unit ||= :kg
   end
 
+  def round_level
+    @round_level ||= 4
+  end
+
   def allowed_units
     [:kg, :lb]
   end
