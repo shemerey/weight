@@ -1,4 +1,4 @@
-# Weight
+# Weight (0.0.1 alpha version)
 
 It's dead simple Value object, which provides convenient way to work with
 weight in a different unit systems. It could be useful if you have to work with
@@ -18,15 +18,34 @@ Or install it yourself as:
 
     $ gem install weight
 
+## Configuration
+You could configure default unit system (:kg or :lb)
+
+just put this in your initializer: config/initializers/weight.rb
+
+```ruby
+  # new object in kg by default
+  Weight.new # => <Weight: @input_value=0, @input_unit=:kg>
+
+  Weight::Configuration.configure do |config|
+    config.default_unit = :lb  # by default it uses :kg
+  end
+
+  # Now default object looks like
+  Weight.new # => <Weight: @input_value=0, @input_unit=:lb>
+```
+
 ## Usage
 
 ### Basic Math with Weight objects
 
+```ruby
  Weight.new(1, :kg) + Weight.new(1, :kg) == Weight.new(2, :kg)
  Weight.new(1, :kg) - Weight.new(1, :kg) == Weight.new(0, :kg)
 
  Weight.new(1, :kg) * 2 == Weight.new(2, :kg)
  Weight.new(2, :kg) / 2 == Weight.new(1, :kg)
+```
 
 ### Basic comparison with Weight objects
 

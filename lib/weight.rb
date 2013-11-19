@@ -9,7 +9,7 @@ class Weight
   # @param unit [String] The unit in which the value is expressed. Currently
   #   supports 'lb' and 'kg'
   # @raise [TypeError] When weight is negative
-  def initialize(value = 0, unit = system_unit)
+  def initialize(value = 0, unit = default_unit)
     self.value, self.unit = value, unit
   end
 
@@ -100,16 +100,8 @@ class Weight
     self.class.new(value / other, unit)
   end
 
-  def convert_to(target_unit)
-    case target_unit
-    when :lb
-      to_lbs
-    when :kg
-      to_kgs
-    end
-  end
-
   private
+
   # The weight expressed in kilograms for internal usage
   # @return [Float] The weight in pounds
   # @raise [TypeError] When the unit passed was neither kg nor lb
