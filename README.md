@@ -1,4 +1,4 @@
-# Weight (0.0.1 alpha version)
+# Weight (0.0.2 alpha version)
 
 * [![Code Climate](https://codeclimate.com/github/shemerey/weight.png)](https://codeclimate.com/github/shemerey/weight)
 * [![Build Status](https://api.travis-ci.org/shemerey/weight.png)](https://travis-ci.org/shemerey/weight)
