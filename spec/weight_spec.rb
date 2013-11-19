@@ -1,8 +1,12 @@
 require 'spec_helper'
 
 describe Weight do
+  let(:one_kg) { described_class.new(1, 'kg') }
+  let(:two_kg) { described_class.new(2, 'kg') }
+
   let(:one_lb) { described_class.new(1, 'lb') }
   let(:two_lb) { described_class.new(2, 'lb') }
+
   let(:another_lb) { described_class.new(1, 'lb') }
 
   it 'should take two options value and unit type' do
@@ -106,6 +110,10 @@ describe Weight do
       expect do
         (one_lb * one_lb)
       end.to raise_error(TypeError)
+    end
+
+    it '2 kgs divided by two should be 1 kg' do
+      (two_kg / 2).should == one_kg
     end
 
     it '2 lbs divided by two should be 1 lbs' do

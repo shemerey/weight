@@ -23,26 +23,26 @@ class Weight
 
   # Returns the weight converted to pounds
   # @return [Float] The weight in pounds
-  def to_lbs
-    raw_data.round(4)
+  def to_kgs
+    raw_data_in_kg.round(4)
   end
 
   # Returns the weight converted to kilograms
   # @return [Float] The weight in kilograms
-  def to_kgs
-    (raw_data / pounds_per_kilogram).round(4)
+  def to_lbs
+    (raw_data_in_kg * pounds_per_kilogram).round(4)
   end
 
   # Returns the weight converted to pounds
   # @return [Float] The weight in pounds
   def to_f
-    to_lbs
+    value.to_f.round(4)
   end
 
   # Returns the weight in pounds rounded to the closest integer
   # @return [Int] The weight in pounds rounded
   def to_i
-    to_lbs.round
+    value.round
   end
 
   # Addition operation
@@ -51,7 +51,7 @@ class Weight
   # @raise [TypeError] When the argument passed is not a Weight
   def +(other)
     raise TypeError, 'You can only add weights' unless other.is_a?(Weight)
-    self.class.new(raw_data + other.to_lbs, 'lb')
+    self.class.new(raw_data_in_kg + other.to_kgs, :kg)
   end
 
   # Comparison operator
@@ -61,7 +61,7 @@ class Weight
   # @raise [TypeError] When the argument passed is not a Weight
   def ==(other)
     raise TypeError, 'You can only compare weights' unless other.is_a?(Weight)
-    raw_data.round(4) == other.to_lbs
+    raw_data_in_kg.round(4) == other.to_kgs
   end
 
   # Comparison operator
@@ -70,7 +70,7 @@ class Weight
   # @raise [TypeError] When the argument passed is not a Weight
   def <=>(other)
     raise TypeError, 'You can only compare weights' unless other.is_a?(Weight)
-    self.to_lbs <=> other.to_lbs
+    self.to_kgs <=> other.to_kgs
   end
 
   # Substract operation
@@ -79,7 +79,7 @@ class Weight
   # @raise [TypeError] When the argument passed is not a Weight
   def -(other)
     raise TypeError, 'You can only substract weights' unless other.is_a?(Weight)
-    self.class.new(raw_data - other.to_lbs, 'lb')
+    self.class.new(raw_data_in_kg - other.to_kgs, :kg)
   end
 
   # Multiplication operation
@@ -88,7 +88,7 @@ class Weight
   # @raise [TypeError] When the argument passed is not a Weight
   def *(other)
     raise TypeError, 'You can only multiply a weight by a number' unless other.is_a?(Numeric)
-    self.class.new(raw_data * other, 'lb')
+    self.class.new(value * other, unit)
   end
 
   # Division operation
@@ -97,20 +97,28 @@ class Weight
   # @raise [TypeError] When the argument passed is not a Weight
   def /(other)
     raise TypeError, 'You can only divide a weight by a number' unless other.is_a?(Numeric)
-    self.class.new(raw_data / other, 'lb')
+    self.class.new(value / other, unit)
+  end
+
+  def convert_to(target_unit)
+    case target_unit
+    when :lb
+      to_lbs
+    when :kg
+      to_kgs
+    end
   end
 
   private
-
-  # The weight expressed in pounds for internal usage
+  # The weight expressed in kilograms for internal usage
   # @return [Float] The weight in pounds
   # @raise [TypeError] When the unit passed was neither kg nor lb
-  def raw_data
+  def raw_data_in_kg
     case unit
     when :kg
-      value * pounds_per_kilogram
-    when :lb
       value
+    when :lb
+      value / pounds_per_kilogram
     else
       raise TypeError, 'Unit is neither kg nor lb'
     end
