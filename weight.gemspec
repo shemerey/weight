@@ -8,9 +8,14 @@ Gem::Specification.new do |spec|
   spec.version       = Weight::VERSION
   spec.authors       = ["Anton Shemerey"]
   spec.email         = ["shemerey@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Dead simple value object, with one purpose work with weight}
+  spec.summary       = %q{
+                          It's dead simple Value object, which provides convenient way
+                          to work with weight in a different unit systems. It could be useful
+                          if you have to work with different unit system, for example
+                          you have to work with :kg as well as :lb for USA
+                        }
+  spec.homepage      = "https://github.com/shemerey/weight"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
