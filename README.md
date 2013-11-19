@@ -49,9 +49,11 @@ just put this in your initializer: config/initializers/weight.rb
 
 ### Basic comparison with Weight objects
 
+```ruby
  Weight.new(3, :lb).between?(Weight.new(1, :kg), Weight.new(2, :kg))
  Weight.new(1, :kg) > Weight.new(2, :lb)
  Weight.new(1, :lb) <= Weight.new(0.5, :kg)
+```
 
 ## Contributing
 
