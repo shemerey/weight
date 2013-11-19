@@ -112,6 +112,10 @@ describe Weight do
       end.to raise_error(TypeError)
     end
 
+    it '1 kg multipied by two should be 2 kg' do
+      (one_kg * 2).should == two_kg
+    end
+
     it '2 kgs divided by two should be 1 kg' do
       (two_kg / 2).should == one_kg
     end

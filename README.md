@@ -1,6 +1,8 @@
 # Weight
 
-TODO: Write a gem description
+It's dead simple Value object, which provides convenient way to work with
+weight in a different unit systems. It could be useful if you have to work with
+different unit system, for example you have to work with :kg as well as :lb for USA
 
 ## Installation
 
@@ -18,7 +20,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Basic Math with Weight objects
+
+ Weight.new(1, :kg) + Weight.new(1, :kg) == Weight.new(2, :kg)
+ Weight.new(1, :kg) - Weight.new(1, :kg) == Weight.new(0, :kg)
+
+ Weight.new(1, :kg) * 2 == Weight.new(2, :kg)
+ Weight.new(2, :kg) / 2 == Weight.new(1, :kg)
+
+### Basic comparison with Weight objects
+
+ Weight.new(3, :lb).between?(Weight.new(1, :kg), Weight.new(2, :kg))
+ Weight.new(1, :kg) > Weight.new(2, :lb)
+ Weight.new(1, :lb) <= Weight.new(0.5, :kg)
 
 ## Contributing
 
