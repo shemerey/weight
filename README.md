@@ -1,5 +1,7 @@
 # Weight (0.0.1 alpha version)
 
+[![Code Climate](https://codeclimate.com/github/shemerey/weight.png)](https://codeclimate.com/github/shemerey/weight)
+
 It's dead simple Value object, which provides convenient way to work with
 weight in a different unit systems. It could be useful if you have to work with
 different unit system, for example you have to work with :kg as well as :lb for USA
