@@ -1,20 +1,24 @@
-require "weight/version"
+require "weight/all"
 
 class Weight
   include Comparable
+  include Weight::Configuration
 
   # Class contructor
   # @param value [Int] The weight of the object
   # @param unit [String] The unit in which the value is expressed. Currently
   #   supports 'lb' and 'kg'
   # @raise [TypeError] When weight is negative
-  def initialize(value = 0, unit = 'lb')
-    raise TypeError, 'Weight cannot be negative' if value < 0
-    @value, @unit = value.to_f, unit.to_sym
+  def initialize(value = 0, unit = system_unit)
+    self.value, self.unit = value, unit
+  end
+
+  def value
+    @input_value
   end
 
   def unit
-    @unit.to_s
+    @input_unit
   end
 
   # Returns the weight converted to pounds
@@ -102,16 +106,27 @@ class Weight
   # @return [Float] The weight in pounds
   # @raise [TypeError] When the unit passed was neither kg nor lb
   def raw_data
-    case @unit
+    case unit
     when :kg
-      @value * pounds_per_kilogram
+      value * pounds_per_kilogram
     when :lb
-      @value
+      value
     else
       raise TypeError, 'Unit is neither kg nor lb'
     end
   end
 
+  def value=(value)
+    raise TypeError, 'Weight cannot be negative' if value < 0
+    raise TypeError, 'Weight value should be Numeric' unless value.is_a? Numeric
+    @input_value = value
+  end
+
+  def unit=(unit)
+    unit = unit.to_s.downcase.to_sym
+    raise ArgumentError, "You should use one from allowe unit tipes #{allowed_units.inspect}" unless allowed_units.include?(unit)
+    @input_unit = unit
+  end
 
   # The conversion rate between pounds and kilograms
   # @return [Float] The number of pounds in a kilogram
