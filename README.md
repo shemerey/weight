@@ -7,6 +7,17 @@ It's dead simple Value object, which provides convenient way to work with
 weight in a different unit systems. It could be useful if you have to work with
 different unit system, for example you have to work with :kg as well as :lb for USA
 
+## Compatible with:
+
+ * mri 2.0.0
+ * mri 1.9.3
+ * mri 1.9.2
+ * jruby-19mode
+ * rbx-19mode
+ * jruby-18mode
+ * mri 1.8.7
+ * ree
+
 ## Installation
 
 Add this line to your application's Gemfile:
