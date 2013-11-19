@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Weight::Configuration do
+  let(:described_class) { Weight::Configuration }
   describe '#default configuraiton' do
     it 'should be kilogram by default' do
       described_class.default_unit.should == :kg

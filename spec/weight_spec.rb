@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Weight do
+  let(:described_class) { Weight }
+
   let(:one_kg) { described_class.new(1, 'kg') }
   let(:two_kg) { described_class.new(2, 'kg') }
 
