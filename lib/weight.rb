@@ -51,7 +51,14 @@ class Weight
   # @raise [TypeError] When the argument passed is not a Weight
   def +(other)
     raise TypeError, 'You can only add weights' unless other.is_a?(Weight)
-    self.class.new(raw_data_in_kg + other.to_kgs, :kg)
+    new_weight = self.class.new(raw_data_in_kg + other.to_kgs, :kg)
+    
+    case self.unit
+    when :lb
+      Weight.new(new_weight.to_lbs, :lb)
+    when :kg
+      new_weight
+    end
   end
 
   # Comparison operator

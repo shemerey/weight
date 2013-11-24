@@ -82,6 +82,10 @@ describe Weight do
       one_lb.should == another_lb
     end
 
+    it 'should keep original weight unit for  + operation' do 
+      (one_lb + one_kg).unit.should == :lb
+    end
+
     it '2 lbs - 1 lb should be 1 lb' do
       (two_lb - one_lb).should == one_lb
     end
