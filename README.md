@@ -1,4 +1,4 @@
-# Weight (0.0.2 alpha version)
+# Weight (1.0.0 version)
 
 * [![Code Climate](https://codeclimate.com/github/shemerey/weight.png)](https://codeclimate.com/github/shemerey/weight)
 * [![Build Status](https://api.travis-ci.org/shemerey/weight.png)](https://travis-ci.org/shemerey/weight)
@@ -60,6 +60,13 @@ just put this in your initializer: config/initializers/weight.rb
 
  Weight.new(1, :kg) * 2 == Weight.new(2, :kg)
  Weight.new(2, :kg) / 2 == Weight.new(1, :kg)
+```
+
+#### Convert result to the first object unit system
+
+```ruby
+ Weight.new(1, :kg) + Weight.new(1, :lb) # =>   #<Weight: @input_value=1.4536, @input_unit=:kg>
+ Weight.new(1, :lb) + Weight.new(1, :kg) # =>   #<Weight: @input_value=3.2046, @input_unit=:lb>
 ```
 
 ### Basic comparison with Weight objects
