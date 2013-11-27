@@ -8,11 +8,92 @@ describe Weight do
 
   let(:one_lb) { described_class.new(1, 'lb') }
   let(:two_lb) { described_class.new(2, 'lb') }
+  let(:three_lb) { described_class.new(3, 'lb') }
 
   let(:another_lb) { described_class.new(1, 'lb') }
 
   it 'should take two options value and unit type' do
     described_class.new(1, 'lb').should be_instance_of(described_class)
+  end
+
+  describe 'basic mas calculation' do
+    it 'for - operator result unit should be first == to first object unit' do
+      (one_kg - one_lb).unit.should == :kg
+    end
+
+    it 'for - operator result unit should be first == to first object unit' do
+      (three_lb - one_kg).unit.should == :lb
+    end
+
+    it 'for + operator result unit should be first == to first object unit' do
+      (one_kg + one_lb).unit.should == :kg
+    end
+
+    it 'for + operator result unit should be first == to first object unit' do
+      (one_lb + one_kg).unit.should == :lb
+    end
+
+    it '[-] should compute weight objects with different units properly' do
+      (one_kg - one_lb).should > one_lb
+      (one_kg + one_lb).should < two_kg
+    end
+
+    it '[+] should compute weight objects with different units properly' do
+      (one_kg + one_lb).should < two_kg
+      (one_kg + one_lb).should > two_lb
+    end
+
+    it '1 lb + 1 lb should be 2 lbs' do
+      (one_lb + one_lb).should == two_lb
+    end
+
+    it 'two objects with the same weight and type should be equal' do
+      one_lb.should == another_lb
+    end
+
+    it '2 lbs - 1 lb should be 1 lb' do
+      (two_lb - one_lb).should == one_lb
+    end
+
+    it '2 times 1 lb should be 2 lbs' do
+      (one_lb * 2).should == two_lb
+    end
+
+    it 'attempting to add a weight to something that is not a weight should raise an error' do
+      expect do
+        (one_lb + 1)
+      end.to raise_error(TypeError)
+    end
+
+    it 'attempting to substract from a weight something that is not a weight should raise an error' do
+      expect do
+        (one_lb - 1)
+      end.to raise_error(TypeError)
+    end
+
+    it 'attempting to multiply a weight by another weight should raise an error' do
+      expect do
+        (one_lb * one_lb)
+      end.to raise_error(TypeError)
+    end
+
+    it '1 kg multipied by two should be 2 kg' do
+      (one_kg * 2).should == two_kg
+    end
+
+    it '2 kgs divided by two should be 1 kg' do
+      (two_kg / 2).should == one_kg
+    end
+
+    it '2 lbs divided by two should be 1 lbs' do
+      (two_lb / 2).should == one_lb
+    end
+
+    it 'attempting to divide a weight by another weight should raise an error' do
+      expect do
+        (two_lb / two_lb)
+      end.to raise_error(TypeError)
+    end
   end
 
   describe 'calculation between different units' do
@@ -74,61 +155,9 @@ describe Weight do
       one_lb.should be < two_lb
     end
 
-    it '1 lb + 1 lb should be 2 lbs' do
-      (one_lb + one_lb).should == two_lb
-    end
-
-    it 'two objects with the same weight and type should be equal' do
-      one_lb.should == another_lb
-    end
-
-    it '2 lbs - 1 lb should be 1 lb' do
-      (two_lb - one_lb).should == one_lb
-    end
-
-    it '2 times 1 lb should be 2 lbs' do
-      (one_lb * 2).should == two_lb
-    end
-
     it 'attempting to compare a weight to something that is not a weight should raise an error' do
       expect do
         (one_lb == 1)
-      end.to raise_error(TypeError)
-    end
-
-    it 'attempting to add a weight to something that is not a weight should raise an error' do
-      expect do
-        (one_lb + 1)
-      end.to raise_error(TypeError)
-    end
-
-    it 'attempting to substract from a weight something that is not a weight should raise an error' do
-      expect do
-        (one_lb - 1)
-      end.to raise_error(TypeError)
-    end
-
-    it 'attempting to multiply a weight by another weight should raise an error' do
-      expect do
-        (one_lb * one_lb)
-      end.to raise_error(TypeError)
-    end
-
-    it '1 kg multipied by two should be 2 kg' do
-      (one_kg * 2).should == two_kg
-    end
-
-    it '2 kgs divided by two should be 1 kg' do
-      (two_kg / 2).should == one_kg
-    end
-
-    it '2 lbs divided by two should be 1 lbs' do
-      (two_lb / 2).should == one_lb
-    end
-
-    it 'attempting to divide a weight by another weight should raise an error' do
-      expect do
-        (two_lb / two_lb)
       end.to raise_error(TypeError)
     end
   end

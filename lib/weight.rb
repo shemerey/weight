@@ -51,7 +51,7 @@ class Weight
   # @raise [TypeError] When the argument passed is not a Weight
   def +(other)
     raise TypeError, 'You can only add weights' unless other.is_a?(Weight)
-    self.class.new(raw_data_in_kg + other.to_kgs, :kg)
+    self.class.new(value + other_value(other), unit)
   end
 
   # Comparison operator
@@ -79,7 +79,7 @@ class Weight
   # @raise [TypeError] When the argument passed is not a Weight
   def -(other)
     raise TypeError, 'You can only substract weights' unless other.is_a?(Weight)
-    self.class.new(raw_data_in_kg - other.to_kgs, :kg)
+    self.class.new(value - other_value(other), unit)
   end
 
   # Multiplication operation
@@ -101,6 +101,16 @@ class Weight
   end
 
   private
+
+  # Helper method return value for other object in current object unit system
+  def other_value(other)
+    case unit
+    when :kg
+      other.to_kgs
+    when :lb
+      other.to_lbs
+    end
+  end
 
   def round(value)
     sprintf("%0.0#{round_level}f", value.to_f).to_f
